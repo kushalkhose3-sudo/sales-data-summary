@@ -1,0 +1,34 @@
+import pandas as pd
+print("-----SALES DATA SUMMARY PROJECT-----")
+#USER INPUT SECTION
+print(" USER INPUT MODE ")
+num=int(input("Number of Products you want to add?: "))
+user_product=[]
+user_prices=[]
+user_quantity=[]
+#FOR LOOP FOR INPUTS
+for i in range(num):
+    print(f"Enter details for Product {i+1}:")
+    p=input(" Product Name: ")
+    pr=int(input("Enter Price: "))
+    q=int(input("Enter Quantity: "))
+
+    user_product.append(p)
+    user_prices.append(pr)
+    user_quantity.append(q)
+
+#Create user DataFrame
+user_df =pd.DataFrame({
+    "Product":user_product,
+    "Price":user_prices,
+    "Quantity":user_quantity
+})
+#Calculate Revenue
+user_df["Revenue"]=user_df["Price"]*user_df["Quantity"]
+#Sort by Revenue
+user_sorted_df=user_df.sort_values(by="Revenue", ascending=False)
+print(user_sorted_df)
+#SAVE USER DATA AS CSV
+user_df_csv=user_df.to_csv("user_sales_data.csv",index=False)
+print("Saved: user_sales_data.csv")
+print("---PROJECT COMPLETED SUCCESSFULLY---")
